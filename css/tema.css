@@ -1,0 +1,213 @@
+/* ============================================================
+   TEMA — Ghost Sort
+   ============================================================
+   Cores, fontes, estilos dos botões. NÃO mexe no layout das telas.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+/* ---------- VARIÁVEIS ---------- */
+:root {
+  --fundo: #0a0a12;
+  --fundo-2: #12121e;
+  --painel: #16162a;
+
+  --neon-ciano: #00E5FF;
+  --neon-rosa: #FF00AA;
+  --neon-verde: #7CFC00;
+  --neon-vermelho: #FF3B3B;
+  --neon-dourado: #FFD700;
+
+  --texto: #F2E9F2;
+  --texto-fraco: rgba(242, 233, 242, 0.6);
+
+  --jogador: var(--neon-ciano);
+  --computador: var(--neon-rosa);
+  --correto: var(--neon-verde);
+  --errado: var(--neon-vermelho);
+  --dourado: var(--neon-dourado);
+}
+
+/* ---------- BODY ---------- */
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---------- EFEITO CRT (linhas horizontais) ---------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ---------- BOTÕES GENÉRICOS ---------- */
+.btn-jogar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  background: linear-gradient(180deg, var(--neon-ciano), #0088AA);
+  color: var(--fundo);
+  border: 2px solid var(--neon-ciano);
+  border-radius: 6px;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+}
+
+.btn-jogar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.9);
+}
+
+.btn-reiniciar,
+.btn-voltar {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  background: var(--painel);
+  color: var(--texto);
+  border: 2px solid var(--neon-ciano);
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.btn-reiniciar:hover,
+.btn-voltar:hover {
+  color: var(--fundo);
+  background: var(--neon-ciano);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+/* ---------- PAINÉIS DO JOGO ---------- */
+.painel {
+  background: var(--painel);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 2px solid;
+}
+
+.painel-jogador {
+  border-color: var(--neon-ciano);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
+}
+
+.painel-computador {
+  border-color: var(--neon-rosa);
+  box-shadow: 0 0 20px rgba(255, 0, 170, 0.25);
+}
+
+.painel h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.painel-jogador h3 { color: var(--neon-ciano); }
+.painel-computador h3 { color: var(--neon-rosa); }
+
+.icone-painel {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* ---------- FANTASMAS ---------- */
+.fantasma {
+  width: 60px;
+  height: 75px;
+  border-radius: 50% 50% 20% 20%;
+  display: grid;
+  place-items: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.painel-jogador .fantasma {
+  background: linear-gradient(180deg, var(--neon-ciano), #0088AA);
+  color: var(--fundo);
+}
+
+.painel-computador .fantasma {
+  background: linear-gradient(180deg, var(--neon-rosa), #6B21A8);
+}
+
+.fantasma.selecionado {
+  transform: scale(1.15) translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+  border: 2px solid #fff;
+}
+
+.fantasma.correto {
+  background: linear-gradient(180deg, var(--neon-verde), #3a8a00) !important;
+  color: var(--fundo);
+}
+
+.comparacoes {
+  text-align: center;
+  margin-top: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.65rem;
+  color: var(--neon-dourado);
+}
+
+/* ---------- NAVEGAÇÃO (antiga, mas mantida caso queira usar) ---------- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(10, 10, 18, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--neon-ciano);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  color: var(--neon-ciano);
+  text-decoration: none;
+}
+
+.nav-link {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: var(--texto);
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--neon-ciano);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: var(--neon-ciano);
+  color: var(--fundo);
+}

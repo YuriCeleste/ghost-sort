@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👻 Ghost Sort</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tema.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       TELA 1 — MENU
+       ============================================================ -->
+  <section id="tela-menu" class="tela ativa">
+    <div class="menu-conteudo">
+
+      <img src="assets/imagens/logo.png" alt="Ghost Sort" class="logo-jogo">
+
+      <button class="btn-menu" onclick="iniciarJogo()">
+        <img src="assets/imagens/play.png" alt="Jogar">
+      </button>
+
+      <button class="btn-menu" onclick="mostrarTela('opcoes')">
+        <img src="assets/imagens/opcoes.png" alt="Opções">
+      </button>
+
+      <button class="btn-menu" onclick="mostrarTela('creditos')">
+        <img src="assets/imagens/creditos.png" alt="Créditos">
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TELA 2 — JOGO
+       ============================================================ -->
+  <section id="tela-jogo" class="tela">
+    <div class="jogo-header">
+      <h2>👻 Ghost Sort</h2>
+      <div class="info-jogo">
+        <span>⏱ <span id="tempo">00:00</span></span>
+        <span>🎯 <span id="dificuldade-atual">Fácil</span></span>
+      </div>
+    </div>
+
+    <div class="jogo-container">
+      <div class="painel painel-jogador">
+        <h3>
+          <img src="assets/imagens/player.png" alt="Ceifador" class="icone-painel">
+          VOCÊ
+        </h3>
+        <div class="lista" id="lista-jogador"></div>
+        <p class="comparacoes">Comparações: <span id="comp-jogador">0</span></p>
+      </div>
+
+      <div class="painel painel-computador">
+        <h3>COMPUTADOR</h3>
+        <div class="lista" id="lista-computador"></div>
+        <p class="comparacoes">Comparações: <span id="comp-computador">0</span></p>
+      </div>
+    </div>
+
+    <div class="jogo-controles">
+      <p>
+        Use as setas
+        <kbd>←</kbd> <kbd>→</kbd> para mover o fantasma selecionado
+        e <kbd>↑</kbd> <kbd>↓</kbd> para trocar a seleção.
+      </p>
+      <button class="btn-reiniciar" onclick="iniciarJogo()">🔄 NOVO JOGO</button>
+      <button class="btn-voltar" onclick="mostrarTela('menu')">← VOLTAR AO MENU</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TELA 3 — CRÉDITOS
+       ============================================================ -->
+  <section id="tela-creditos" class="tela">
+    <div class="creditos-container">
+      <h2>Créditos</h2>
+      <p class="subtitulo">Projeto desenvolvido por:</p>
+
+      <div class="cards-criadores">
+        <a class="card-criador" href="https://github.com/YuriCeleste" target="_blank" rel="noopener">
+          <div class="avatar">Y</div>
+          <h3>Yuri Calixto</h3>
+          <p>@YuriCeleste</p>
+        </a>
+        <a class="card-criador" href="https://github.com/Devs097518" target="_blank" rel="noopener">
+          <div class="avatar">D</div>
+          <h3>Dayvson</h3>
+          <p>@Devs097518</p>
+        </a>
+      </div>
+
+      <div class="tecnologias">
+        <h3>Tecnologias utilizadas</h3>
+        <ul>
+          <li>HTML5</li>
+          <li>CSS3</li>
+          <li>JavaScript</li>
+          <li>Insertion Sort</li>
+        </ul>
+      </div>
+
+      <p class="rodape-creditos">
+        Repositório oficial:
+        <a href="https://github.com/YuriCeleste/ghost-sort" target="_blank" rel="noopener">
+          github.com/YuriCeleste/ghost-sort
+        </a>
+      </p>
+
+      <button class="btn-voltar" onclick="mostrarTela('menu')">← VOLTAR AO MENU</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TELA 4 — OPÇÕES
+       ============================================================ -->
+  <section id="tela-opcoes" class="tela">
+    <div class="opcoes-container">
+      <h2>Opções</h2>
+      <p class="subtitulo">Escolha a dificuldade:</p>
+
+      <div class="opcoes-dificuldades">
+        <button class="btn-dificuldade-opcao ativo" data-nivel="facil" onclick="selecionarDificuldade('facil')">
+          <img src="assets/imagens/facil.png" alt="Fácil">
+        </button>
+        <button class="btn-dificuldade-opcao" data-nivel="medio" onclick="selecionarDificuldade('medio')">
+          <img src="assets/imagens/medio.png" alt="Médio">
+        </button>
+        <button class="btn-dificuldade-opcao" data-nivel="dificil" onclick="selecionarDificuldade('dificil')">
+          <img src="assets/imagens/dificil.png" alt="Difícil">
+        </button>
+      </div>
+
+      <p class="opcao-atual">Dificuldade atual: <strong id="opcao-atual-nome">Fácil</strong></p>
+
+      <button class="btn-voltar" onclick="mostrarTela('menu')">← VOLTAR AO MENU</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TELA 5 — MODAL DE RESULTADO
+       ============================================================ -->
+  <div id="tela-resultado" class="modal">
+    <div class="modal-conteudo">
+      <img src="assets/imagens/resultados.png" alt="Fantasmas indo para a luz" class="resultado-imagem">
+      <h2 id="resultado-titulo">🎉 VOCÊ VENCEU! 🎉</h2>
+      <p id="resultado-mensagem">Você libertou todos os fantasmas antes do computador.</p>
+
+      <div class="estatisticas">
+        <p>Tempo: <strong id="resultado-tempo">00:00</strong></p>
+        <p>Suas comparações: <strong id="resultado-comp-jogador">0</strong></p>
+        <p>Comparações do computador: <strong id="resultado-comp-computador">0</strong></p>
+      </div>
+
+      <button class="btn-jogar" onclick="fecharResultado(); iniciarJogo();">
+        🔄 JOGAR NOVAMENTE
+      </button>
+      <button class="btn-voltar" onclick="fecharResultado(); mostrarTela('menu');">
+        ← VOLTAR AO MENU
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="js/estado.js"></script>
+  <script src="js/insertion-sort.js"></script>
+  <script src="js/interface.js"></script>
+  <script src="js/controles.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

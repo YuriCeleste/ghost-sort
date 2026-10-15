@@ -1,0 +1,591 @@
+/* ============================================================
+   LAYOUT — Ghost Sort
+   ============================================================ */
+
+/* ============================================================
+   SISTEMA DE TELAS
+   ============================================================ */
+.tela {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.tela.ativa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#tela-jogo.ativa {
+  display: block;
+}
+
+/* ============================================================
+   MENU — CEMITÉRIO COMO CAPA
+   ============================================================ */
+#tela-menu {
+  background-image: url('../assets/imagens/menu.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+#tela-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.menu-conteudo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  max-width: 700px;
+  width: 100%;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.logo-jogo {
+  width: min(55vw, 340px);
+  height: auto;
+  image-rendering: pixelated;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.7));
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.btn-menu {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-menu img {
+  width: 260px;
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+}
+
+.btn-menu:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 22px rgba(0, 229, 255, 0.9));
+}
+
+/* ============================================================
+   CRÉDITOS
+   ============================================================ */
+#tela-creditos {
+  background-image: url('../assets/imagens/creditos1.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+}
+
+#tela-creditos::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.creditos-container {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 10, 18, 0.85);
+  border: 2px solid rgba(0, 229, 255, 0.4);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.creditos-container h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: var(--neon-rosa);
+  text-shadow:
+    0 0 15px rgba(255, 0, 170, 0.8),
+    0 0 30px rgba(255, 0, 170, 0.5);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.creditos-container .subtitulo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--neon-ciano);
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+.cards-criadores {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 240px));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  justify-content: center;
+}
+
+.card-criador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  background: var(--painel);
+  border: 2px solid var(--neon-ciano);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--texto);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+.card-criador:hover {
+  transform: translateY(-6px);
+  border-color: var(--neon-rosa);
+  box-shadow:
+    0 0 25px rgba(255, 0, 170, 0.6),
+    0 0 50px rgba(255, 0, 170, 0.3);
+}
+
+.card-criador .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon-ciano), var(--neon-rosa));
+  display: grid;
+  place-items: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  color: var(--fundo);
+  margin-bottom: 0.8rem;
+  border: 3px solid var(--neon-ciano);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+}
+
+.card-criador h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  color: var(--texto);
+}
+
+.card-criador p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8rem;
+  color: var(--neon-ciano);
+}
+
+.tecnologias {
+  margin: 2rem 0;
+}
+
+.tecnologias h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+  color: var(--neon-dourado);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.tecnologias ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.tecnologias li {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  background: rgba(0, 229, 255, 0.1);
+  border: 2px solid var(--neon-ciano);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  color: var(--neon-ciano);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.rodape-creditos {
+  margin-top: 2rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--texto-fraco);
+}
+
+.rodape-creditos a {
+  color: var(--neon-ciano);
+  text-decoration: none;
+  border-bottom: 2px solid var(--neon-ciano);
+  transition: all 0.25s ease;
+}
+
+.rodape-creditos a:hover {
+  color: var(--neon-rosa);
+  border-color: var(--neon-rosa);
+  text-shadow: 0 0 10px rgba(255, 0, 170, 0.6);
+}
+
+/* ============================================================
+   OPÇÕES
+   ============================================================ */
+#tela-opcoes {
+  background-image: url('../assets/imagens/menu.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+}
+
+#tela-opcoes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.opcoes-container {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 10, 18, 0.85);
+  border: 2px solid rgba(0, 229, 255, 0.4);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.opcoes-container h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: var(--neon-ciano);
+  text-shadow:
+    0 0 15px rgba(0, 229, 255, 0.8),
+    0 0 30px rgba(0, 229, 255, 0.5);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.opcoes-container .subtitulo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--texto-fraco);
+  margin-bottom: 2.5rem;
+}
+
+.opcoes-dificuldades {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.btn-dificuldade-opcao {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-dificuldade-opcao img {
+  width: 180px;
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+}
+
+.btn-dificuldade-opcao:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 22px rgba(0, 229, 255, 0.9));
+}
+
+.btn-dificuldade-opcao.ativo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1));
+}
+
+.opcao-atual {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: var(--texto);
+  margin: 2rem 0 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.opcao-atual strong {
+  color: var(--neon-dourado);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* ============================================================
+   JOGO
+   ============================================================ */
+#tela-jogo {
+  padding: 2rem 1rem;
+}
+
+.jogo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  border-bottom: 2px solid var(--neon-rosa);
+}
+
+.jogo-header h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  color: var(--neon-rosa);
+}
+
+.info-jogo {
+  display: flex;
+  gap: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  color: var(--neon-dourado);
+}
+
+.jogo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.painel {
+  background: var(--painel);
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  border: 2px solid;
+  min-height: 320px;
+}
+
+.painel-jogador {
+  border-color: var(--neon-ciano);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
+}
+
+.painel-computador {
+  border-color: var(--neon-rosa);
+  box-shadow: 0 0 20px rgba(255, 0, 170, 0.25);
+}
+
+.painel h3 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: var(--texto);
+}
+
+.icone-painel {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  min-height: 160px;
+  padding: 1.5rem 1rem;
+}
+
+/* ============================================================
+   FANTASMAS (com PNG + número)
+   ============================================================ */
+.fantasma {
+  position: relative;
+  width: 100px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.fantasma-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.fantasma-jogador {
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.8));
+}
+
+.fantasma-computador {
+  filter: drop-shadow(0 0 8px rgba(255, 0, 170, 0.8));
+}
+
+.fantasma-numero {
+  position: relative;
+  z-index: 2;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.3rem;
+  color: #fff;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    0 0 10px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  margin-top: 5px;
+}
+
+.fantasma.selecionado {
+  transform: scale(1.2) translateY(-8px);
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+  z-index: 10;
+}
+
+.fantasma.correto .fantasma-img {
+  filter: drop-shadow(0 0 12px rgba(124, 252, 0, 1));
+}
+
+.fantasma.correto .fantasma-numero {
+  color: #7CFC00;
+}
+
+.fantasma.errado {
+  animation: tremer 0.3s ease;
+}
+
+@keyframes tremer {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+/* ============================================================
+   CONTROLES DO JOGO
+   ============================================================ */
+.jogo-controles {
+  max-width: 1300px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+.jogo-controles p {
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  color: var(--texto-fraco);
+}
+
+kbd {
+  background: var(--painel);
+  border: 2px solid var(--neon-ciano);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  color: var(--neon-ciano);
+  margin: 0 0.15rem;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal {
+  display: none;
+}
+
+.modal.ativo {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 200;
+}
+
+.modal-conteudo {
+  background: var(--painel);
+  border: 3px solid var(--neon-dourado);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 550px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+.resultado-imagem {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  image-rendering: pixelated;
+  margin: 0 auto 1rem;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 700px) {
+  .logo-jogo { width: min(75vw, 280px); }
+  .btn-menu img { width: 220px; }
+  .btn-dificuldade img { width: 120px; }
+  .btn-dificuldade-opcao img { width: 120px; }
+  .menu-conteudo { gap: 0.6rem; padding: 1rem; }
+  .jogo-container { grid-template-columns: 1fr; }
+  .cards-criadores { grid-template-columns: 1fr; }
+  .fantasma { width: 70px; height: 84px; }
+  .fantasma-numero { font-size: 0.9rem; }
+  .painel { min-height: 240px; }
+}
