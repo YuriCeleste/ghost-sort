@@ -20,7 +20,7 @@ const state = {
 };
 
 const NIVEIS = {
-  facil:   { total: 5,  nome: 'Fácil' },
-  medio:   { total: 8,  nome: 'Médio' },
-  dificil: { total: 12, nome: 'Difícil' }
+  facil:   { nome: 'Fácil',   total: 5, velocidade: 1500 },
+  medio:   { nome: 'Médio',   total: 8, velocidade: 800  },
+  dificil: { nome: 'Difícil', total: 12, velocidade: 300  }
 };

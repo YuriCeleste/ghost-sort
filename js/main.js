@@ -5,6 +5,7 @@
  * Inicialização do jogo e funções principais.
  * ============================================================
  */
+let idPartida = 0;
 
 /* ---------- SELEÇÃO DE DIFICULDADE ---------- */
 function selecionarDificuldade(nivel) {
@@ -25,6 +26,7 @@ function selecionarDificuldade(nivel) {
 
 /* ---------- INICIAR JOGO ---------- */
 function iniciarJogo() {
+  idPartida++;
   const nivel = NIVEIS[state.dificuldade];
 
   state.totalFantasmas = nivel.total;
@@ -59,13 +61,17 @@ function gerarLista(n) {
 
 /* ---------- ORDENAR COMPUTADOR (com animação) ---------- */
 async function ordenarComputador() {
+  const minhaPartida = idPartida;
+  const delay = NIVEIS[state.dificuldade].velocidade;
+
   await insertionSort(state.listaComputador, async (lista, comp) => {
+    if (minhaPartida !== idPartida) return; // partida antiga: ignora
     state.comparacoesComputador = comp;
     renderizar();
-    await sleep(280);
+    await sleep(delay);
   });
 
-  verificarVitoria();
+  if (minhaPartida === idPartida) verificarVitoria();
 }
 
 /* ---------- UTILITÁRIOS ---------- */
