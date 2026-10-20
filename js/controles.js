@@ -19,6 +19,7 @@ document.addEventListener('keydown', (e) => {
     [state.listaJogador[state.selecionado], state.listaJogador[state.selecionado - 1]];
     state.selecionado--;
     state.comparacoesJogador++;
+    tocarSom('mover');
     renderizar();
     verificarVitoria();
   }
@@ -29,6 +30,7 @@ document.addEventListener('keydown', (e) => {
     [state.listaJogador[state.selecionado], state.listaJogador[state.selecionado + 1]];
     state.selecionado++;
     state.comparacoesJogador++;
+    tocarSom('mover');
     renderizar();
     verificarVitoria();
   }
@@ -36,12 +38,14 @@ document.addEventListener('keydown', (e) => {
   /* Cima: seleciona o fantasma anterior */
   else if (e.key === 'ArrowUp' && state.selecionado > 0) {
     state.selecionado--;
+    tocarSom('mover');
     renderizar();
   }
 
   /* Baixo: seleciona o próximo fantasma */
   else if (e.key === 'ArrowDown' && state.selecionado < state.listaJogador.length - 1) {
     state.selecionado++;
+    tocarSom('mover');
     renderizar();
   }
 });

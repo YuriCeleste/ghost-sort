@@ -78,6 +78,7 @@ async function ordenarComputador() {
 
     state.comparacoesComputador = comp;
     state.chaveComputador = info.chave;
+    if (info.tipo === 'mover') tocarSom('mover', 0.25);   // novo
     renderizar();
 
     const espera =
