@@ -9,6 +9,10 @@
 document.addEventListener('keydown', (e) => {
   if (!state.jogoAtivo) return;
 
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+    e.preventDefault();
+  }
+
   /* Esquerda: move o fantasma selecionado para a esquerda */
   if (e.key === 'ArrowLeft' && state.selecionado > 0) {
     [state.listaJogador[state.selecionado - 1], state.listaJogador[state.selecionado]] =

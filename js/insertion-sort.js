@@ -23,17 +23,28 @@ async function insertionSort(lista, onPasso) {
     const chave = lista[i];
     let j = i - 1;
 
+    // Já está no lugar: só conta a comparação e segue (sem levantar)
+    if (lista[j] <= chave) {
+      comparacoes++;
+      if (onPasso) await onPasso(lista, comparacoes, { tipo: 'pular', chave: null });
+      continue;
+    }
+
+    // 1) AFASTAR: levanta a chave
+    if (onPasso) await onPasso(lista, comparacoes, { tipo: 'levantar', chave });
+
+    // 2) MOVER: a chave troca com cada vizinho maior, andando pra esquerda
     while (j >= 0 && lista[j] > chave) {
       comparacoes++;
-      lista[j + 1] = lista[j];
+      [lista[j], lista[j + 1]] = [lista[j + 1], lista[j]];
       j--;
-      if (onPasso) await onPasso(lista, comparacoes);
+      if (onPasso) await onPasso(lista, comparacoes, { tipo: 'mover', chave });
     }
 
     if (j >= 0) comparacoes++;
 
-    lista[j + 1] = chave;
-    if (onPasso) await onPasso(lista, comparacoes);
+    // 3) INSERIR: solta a chave no espaço aberto
+    if (onPasso) await onPasso(lista, comparacoes, { tipo: 'inserir', chave: null });
   }
 
   return comparacoes;

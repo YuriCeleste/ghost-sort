@@ -1,0 +1,16 @@
+/* Movimento suave dos fantasmas. Sobrescreve o transition do layout.css.
+   Usamos a propriedade `translate` para não brigar com o `transform`
+   da classe .selecionado. */
+.fantasma {
+  transition:
+    transform var(--dur-mover, 300ms) ease,
+    translate var(--dur-mover, 300ms) ease,
+    filter 0.3s ease;
+}
+
+/* "Carta na mão": a chave levantada enquanto procura o lugar dela */
+.fantasma.levantado {
+  transform: translateY(-30px) scale(1.15);
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+  z-index: 20;
+}

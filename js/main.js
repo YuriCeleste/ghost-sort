@@ -39,11 +39,16 @@ function iniciarJogo() {
   state.jogoAtivo = true;
 
   document.getElementById('dificuldade-atual').textContent = nivel.nome;
+  
+  document.getElementById('lista-jogador')
+  .style.setProperty('--dur-mover', '180ms');
+
+  state.chaveJogador = null;
+  state.chaveComputador = null;
 
   renderizar();
   iniciarTimer();
   ordenarComputador();
-
   mostrarTela('jogo');
 }
 
@@ -64,14 +69,29 @@ async function ordenarComputador() {
   const minhaPartida = idPartida;
   const delay = NIVEIS[state.dificuldade].velocidade;
 
-  await insertionSort(state.listaComputador, async (lista, comp) => {
-    if (minhaPartida !== idPartida) return; // partida antiga: ignora
+  // a duração da animação acompanha a velocidade do nível
+  document.getElementById('lista-computador')
+    .style.setProperty('--dur-mover', Math.min(450, delay * 0.7) + 'ms');
+
+  await insertionSort(state.listaComputador, async (lista, comp, info) => {
+    if (minhaPartida !== idPartida || !state.jogoAtivo) return;
+
     state.comparacoesComputador = comp;
+    state.chaveComputador = info.chave;
     renderizar();
-    await sleep(delay);
+
+    const espera =
+      info.tipo === 'mover' ? delay :
+      info.tipo === 'pular' ? delay * 0.4 :
+      delay * 0.8; // levantar / inserir
+    await sleep(espera);
   });
 
-  if (minhaPartida === idPartida) verificarVitoria();
+  if (minhaPartida === idPartida) {
+    state.chaveComputador = null;
+    renderizar();
+    verificarVitoria();
+  }
 }
 
 /* ---------- UTILITÁRIOS ---------- */

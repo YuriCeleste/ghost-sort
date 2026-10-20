@@ -12,6 +12,8 @@ const state = {
   listaJogador: [],
   listaComputador: [],
   selecionado: 0,
+  chaveJogador: null,       // novo
+  chaveComputador: null,    // novo
   comparacoesJogador: 0,
   comparacoesComputador: 0,
   tempo: 0,
