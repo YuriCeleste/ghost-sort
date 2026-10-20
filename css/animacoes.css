@@ -14,3 +14,18 @@
   filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
   z-index: 20;
 }
+
+/* Arrastar com mouse/toque */
+#lista-jogador {
+  touch-action: none;   /* no celular, arrastar não rola a página */
+  user-select: none;
+}
+
+#lista-jogador .fantasma {
+  cursor: grab;
+}
+
+#lista-jogador.arrastando .fantasma {
+  cursor: grabbing;
+}
+

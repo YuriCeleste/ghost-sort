@@ -109,12 +109,12 @@ function renderizarLista(id, lista, ehJogador) {
     el.classList.toggle('selecionado', ehJogador && index === state.selecionado);
     el.classList.toggle('levantado', valor === chave);
 
-    if (ehJogador) {
-      el.onclick = () => {
-        state.selecionado = index;
-        renderizar();
-      };
-    }
+    // if (ehJogador) {
+    //   el.onclick = () => {
+    //     state.selecionado = index;
+    //     renderizar();
+    //   };
+    // }
   });
 
   // LAST + INVERT: posição nova menos a antiga vira um deslocamento inicial
