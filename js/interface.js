@@ -6,6 +6,32 @@
  * ============================================================
  */
 
+// Função para animar o personagem
+function animarPersonagem(quem) {
+  // 'quem' vai ser 'jogador' ou 'computador'
+  const imgElement = document.getElementById(`personagem-${quem}`);
+  
+  if (!imgElement) return;
+
+  // Aqui está a correção: Se for 'jogador', o prefixo do arquivo é 'player'.
+  // Se for 'computador', o prefixo é 'computador'.
+  const prefixoArquivo = quem === 'jogador' ? 'player' : 'computador';
+
+  // Monta o caminho certo baseado nos seus arquivos
+  const imgParado = `assets/imagens/${prefixoArquivo}-idle.png`;
+  const imgMexendo = `assets/imagens/${prefixoArquivo}-move.png`;
+
+  // Troca para a imagem de movimento e adiciona a classe de animação CSS
+  imgElement.src = imgMexendo;
+  imgElement.classList.add('animando');
+
+  // Depois de 300ms, volta ao normal
+  setTimeout(() => {
+    imgElement.src = imgParado;
+    imgElement.classList.remove('animando');
+  }, 300); 
+}
+
 /* ---------- NAVEGAÇÃO ENTRE TELAS ---------- */
 function mostrarTela(id) {
   // Esconde TODAS as telas

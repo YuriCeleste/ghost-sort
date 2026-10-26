@@ -20,6 +20,8 @@ function moverSelecionado(direcao) {
   state.selecionado = j;
   state.comparacoesJogador++;
   tocarSom('mover');
+  animarPersonagem('jogador'); 
+  
   renderizar();
   verificarVitoria();
 }

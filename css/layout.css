@@ -589,3 +589,19 @@ kbd {
   .fantasma-numero { font-size: 0.9rem; }
   .painel { min-height: 240px; }
 }
+
+/* Adicione no seu layout.css */
+.personagem-tabuleiro {
+  display: block;
+  margin: 10px auto 0 auto; /* Centraliza e dá um espaço da borda superior */
+  height: 200px; /* Ajuste o tamanho conforme a sua arte */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out; /* Deixa a animação mais fluida */
+  pointer-events: none; /* Impede que o personagem atrapalhe cliques nas cartas */
+}
+
+/* Uma classe extra caso você queira fazer o personagem dar um "pulinho" quando mover */
+.personagem-tabuleiro.animando {
+  transform: translateY(-10px) scale(1.05);
+}

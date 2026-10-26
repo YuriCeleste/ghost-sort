@@ -78,9 +78,11 @@ async function ordenarComputador() {
 
     state.comparacoesComputador = comp;
     state.chaveComputador = info.chave;
-    if (info.tipo === 'mover') tocarSom('mover', 0.25);   // novo
+    if (info.tipo === 'mover') {
+      tocarSom('mover', 0.25);
+      animarPersonagem('computador');
+    }
     renderizar();
-
     const espera =
       info.tipo === 'mover' ? delay :
       info.tipo === 'pular' ? delay * 0.4 :
