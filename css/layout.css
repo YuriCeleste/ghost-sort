@@ -495,12 +495,25 @@
   z-index: 10;
 }
 
-.fantasma.correto .fantasma-img {
-  filter: drop-shadow(0 0 12px rgba(124, 252, 0, 1));
+.painel-jogador .fantasma.correto .fantasma-img {
+  /* Brilho Ciano no desenho do fantasma */
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9)); 
 }
 
-.fantasma.correto .fantasma-numero {
-  color: #7CFC00;
+.painel-jogador .fantasma.correto .fantasma-numero {
+  color: #00FFFF; /* Número Ciano */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra preta para dar leitura */
+}
+
+/* 2. O Fantasma quando está CERTO no tabuleiro do PC (Computador - Roxo) */
+.painel-computador .fantasma.correto .fantasma-img {
+  /* Brilho Roxo no desenho do fantasma */
+  filter: drop-shadow(0 0 12px rgba(218, 112, 214, 0.9));
+}
+
+.painel-computador .fantasma.correto .fantasma-numero {
+  color: #DA70D6; /* Número Roxo */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .fantasma.errado {
@@ -604,4 +617,28 @@ kbd {
 /* Uma classe extra caso você queira fazer o personagem dar um "pulinho" quando mover */
 .personagem-tabuleiro.animando {
   transform: translateY(-10px) scale(1.05);
+}
+
+/* 1. Transição suave em todos os fantasmas (para a cor não trocar de repente) */
+.fantasma {
+  transition: background-color 0.4s ease, filter 0.4s ease, transform 0.2s ease;
+  /* ... mantenha as outras propriedades do seu .fantasma aqui ... */
+}
+
+/* 2. O Estado "Neutro" (Quando a ordem está errada) */
+/* O :not(.correto) significa: "Aplique isso a todos os fantasmas, MENOS os que têm a classe .correto" */
+.fantasma:not(.correto) {
+  background-color: #d1d5db !important; 
+  filter: grayscale(100%) opacity(0.7);
+  transform: scale(0.95); 
+}
+
+/* 4. O Fantasma Selecionado ou Levantado */
+/* Garantir que, mesmo se o jogador segurar uma carta errada, ela mostre a cor real para ele não se perder */
+.fantasma.selecionado,
+.fantasma.levantado {
+  filter: grayscale(0%) opacity(1); /* Tira o cinza */
+  background-color: initial; /* Devolve a cor */
+  transform: scale(1.05); /* Aumenta de tamanho para dar destaque */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Um brilho extra */
 }

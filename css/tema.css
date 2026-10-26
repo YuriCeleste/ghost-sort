@@ -163,10 +163,10 @@ body::after {
   border: 2px solid #fff;
 }
 
-.fantasma.correto {
+/* .fantasma.correto {
   background: linear-gradient(180deg, var(--neon-verde), #3a8a00) !important;
   color: var(--fundo);
-}
+} */
 
 .comparacoes {
   text-align: center;
@@ -212,3 +212,38 @@ body::after {
   color: var(--fundo);
 }
 
+/* ========================================= */
+/* FUNDO DO CARD QUANDO ESTIVER CORRETO      */
+/* ========================================= */
+
+/* 1. Jogador (Ciano) */
+.painel-jogador .fantasma.correto {
+  background-color: #00CED1 !important; /* Força o fundo ciano */
+}
+
+/* 2. Computador (Roxo) */
+.painel-computador .fantasma.correto {
+  background-color: #DA70D6 !important; /* Força o fundo roxo */
+}
+
+/* ========================================= */
+/* DETALHES DO FANTASMA CERTO (O que já fizemos) */
+/* ========================================= */
+
+/* Jogador */
+.painel-jogador .fantasma.correto .fantasma-img {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
+}
+.painel-jogador .fantasma.correto .fantasma-numero {
+  color: #ffffff; /* Deixei o número branco para contrastar com o ciano */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Computador */
+.painel-computador .fantasma.correto .fantasma-img {
+  filter: drop-shadow(0 0 10px rgba(218, 112, 214, 0.7));
+}
+.painel-computador .fantasma.correto .fantasma-numero {
+  color: #ffffff; /* Número branco para contrastar com o roxo */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}

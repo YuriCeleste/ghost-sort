@@ -65,6 +65,7 @@ function renderizar() {
   const cc = document.getElementById('comp-computador');
   if (cj) cj.textContent = state.comparacoesJogador;
   if (cc) cc.textContent = state.comparacoesComputador;
+
 }
 
 function criarFantasma(valor, lado) {

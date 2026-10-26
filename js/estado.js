@@ -8,7 +8,7 @@
 
 const state = {
   dificuldade: 'facil',          // 'facil' | 'medio' | 'dificil'
-  totalFantasmas: 5,
+  totalFantasmas: 12,
   listaJogador: [],
   listaComputador: [],
   selecionado: 0,
@@ -22,7 +22,7 @@ const state = {
 };
 
 const NIVEIS = {
-  facil:   { nome: 'Fácil',   total: 5, velocidade: 1500 },
-  medio:   { nome: 'Médio',   total: 8, velocidade: 800  },
+  facil:   { nome: 'Fácil',   total: 12, velocidade: 1500 },
+  medio:   { nome: 'Médio',   total: 12, velocidade: 800  },
   dificil: { nome: 'Difícil', total: 12, velocidade: 300  }
 };
